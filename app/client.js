@@ -11,8 +11,6 @@ function Client( options ) {
 
     return {
         create: function ( client, callback ) {
-            console.log('create the client!', client);
-
             var validationErrors = [];
             if ( client.email === undefined || client.email.trim() == '' ) {
                 validationErrors.push("Email address is required.");
@@ -137,8 +135,6 @@ function Client( options ) {
         },
 
         get: function ( id, callback ) {
-            console.log('get the client with id ' , id);
-
             db.get('select rowid as id, email, phone from clients where id = ?', [ id ], ( err, row ) => {
                 if ( err ) {
                     console.log('Unable to fetch client:', err);
@@ -181,8 +177,6 @@ function Client( options ) {
         },
 
         search: function ( email, callback ) {
-            console.log('search for clients!', email);
-
             // is this actually a search, or a list?
             var statement = 'select rowid as id, email, phone from clients';
             var params = [];
