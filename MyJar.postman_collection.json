@@ -1,0 +1,83 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MyJar",
+		"_postman_id": "81dd929a-2883-ba1e-89b0-fcc9b0aab044",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Client",
+			"request": {
+				"url": "http://localhost:3000/clients",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"chris@example.com\",\n\t\"phone\": \"07012345678\",\n\t\"one\": 1,\n\t\"two\": 2,\n\t\"three\": 3,\n\t\"four\": 4, \n\t\"five\": 5,\n\t\"six\": 6,\n\t\"seven\": 7,\n\t\"eight\": 8\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client by Email",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/clients?email=chris@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clients"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "chris@example.com",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Clients",
+			"request": {
+				"url": "http://localhost:3000/clients",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client by ID",
+			"request": {
+				"url": "http://localhost:3000/client/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
