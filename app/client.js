@@ -1,4 +1,5 @@
-var encryption = require('./encryption'),
+var config = require('./config'),
+    encryption = require('./encryption'),
     phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
 function Client( options ) {
@@ -44,7 +45,7 @@ function Client( options ) {
                 validationErrors.push("Phone number is required.");
             }
             else {
-                var number = phoneUtil.parseAndKeepRawInput( client.phone, 'GB' );
+                var number = phoneUtil.parseAndKeepRawInput( client.phone, config.phoneNumberFormat );
 
                 if ( phoneUtil.isValidNumber(number) ) {
                     // if it's a valid number, store a formatted version
@@ -53,7 +54,7 @@ function Client( options ) {
                     client.phone = formatted;
                 }
                 else {
-                    validationErrors.push("The phone number provided is not a valid UK number.");
+                    validationErrors.push("The phone number provided is not a valid format.");
                 }
 
             }

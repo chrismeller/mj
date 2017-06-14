@@ -1,4 +1,6 @@
-var config = {};
+var config = {
+    phoneNumberFormat: 'GB',
+};
 
 config.http = {
     port: 3000
