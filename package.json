@@ -1,0 +1,25 @@
+{
+  "name": "@chrismeller/mj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha './**/*.spec.js'",
+    "start": "node index.js",
+    "init": "node app/scripts/init.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.4.1",
+    "body-parser": "^1.17.2",
+    "chai": "^4.0.2",
+    "express": "^4.15.3",
+    "google-libphonenumber": "^2.0.18",
+    "lodash": "^4.17.4",
+    "mocha": "^3.4.2",
+    "querystring": "^0.2.0",
+    "sinon": "^2.3.4",
+    "sqlite3": "^3.1.8"
+  }
+}
