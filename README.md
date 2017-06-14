@@ -24,6 +24,10 @@ Be sure that your headers are set correctly and you're sending the request with 
 
 All results are returned as `application/json` as well, except for 404s.
 
+Postman
+-------
+There is an exported collection for Postman in the root directory that includes requests for all of the endpoints for easy testing.
+
 Validating Encryption
 =====================
 To verify that the phone numbers are properly being encrypted, you can use the `sqlite3` command line utility.
