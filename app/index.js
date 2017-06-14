@@ -3,7 +3,9 @@
 var config = require('./config'),
     http = require('http'),
     port = config.http.port,
-    clientHandler = require('./client'),
+    sqlite3 = require('sqlite3'),
+    db = new sqlite3.Database( config.db.connString ),
+    clientHandler = require('./client')( { db: db } ),
     postProcessor = require('./post-processor'),
     queryString = require('querystring');
 
