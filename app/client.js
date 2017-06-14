@@ -104,8 +104,6 @@ function Client( options ) {
 
                         var clientId = row.id;
 
-                        console.log('newly added client is ', clientId);
-
                         // now we save all the meta records
                         // first, delete the email and phone properties we know about
                         delete client['email'];
@@ -116,7 +114,6 @@ function Client( options ) {
 
                             // now we'll just iterate over all the others
                             Object.keys(client).forEach( ( key ) => {
-                                console.log( 'inserting meta key ', key );
                                 var value = client[ key ];
                                 insert.run( [ clientId, key, value ] );
                             });
@@ -125,7 +122,6 @@ function Client( options ) {
 
                             // now get back out the full client we just added
                             this.get( clientId, ( newClient ) => {
-                                console.log('new client', newClient);
                                 callback( null, null, newClient );
                             });
                         });
