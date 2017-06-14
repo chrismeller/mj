@@ -36,19 +36,19 @@ To verify that the phone numbers are properly being encrypted, you can use the `
 2. `.headers on`
 3. `select * from clients`
 
-There are only two columns in the `clients` table - the second one should contain the hex-encoded version of the AES encrypted phone number.
+There are only two columns in the `clients` table - the second one should contain the hex-encoded version of the AES-encrypted phone number.
 
 Notes
 =====
-* I went with a simple SQLite database that sits beside the service for storing data. Obviously this isn't ideal and we'd probably be connecting to a "real" master database if we were doing this in the real world.
+* I went with a simple SQLite database that sits beside the service for storing data. Obviously this isn't ideal, but it's quick and easy.
 
 * Normally I would be using a framework (probably restify since there is no web component, just a REST API), but one of the requirements was to avoid them.
 
 * I'd have preferred to change the POST payload so that it was more strictly typed, rather than just blindly accepting a different object every time. Having something along the lines of `{ email: '...', phone: '...', meta: [ { key: '...', value: '...' }, ... ] }` would make it much easier to validate, test, and use.
 
-* If I'd been using a framework I'd have added on pagination for the `GET /clients` endpoint, but it wasn't worth the time for example purposes. All of the building blocks (parsing the query string, passing in the pagination parameters, and building a dynamic SQL query) are all already present in that endpoint for handling the optional email address.
+* If I'd been using a framework I'd have added on pagination for the `GET /clients` endpoint, but it wasn't worth the time for example purposes. All of the building blocks (parsing the query string, passing in the parameters, and building a dynamic SQL query) are all already present in that endpoint for handling the optional email address.
 
-* The same also applies for searching by other arbitrary keys - the requisite pieces are there, it would be a simple matter of building an IN clause for the first query (`where rowid in ( select distinct clientId from clientMeta where ? = ?` with the key and value from the query string as params).
+* The same also applies for searching by other arbitrary keys - the requisite pieces are there, it would be a simple matter of building an IN clause for the first query (`where rowid in ( select distinct clientId from clientMeta where ? = ? )` with the key and value from the query string as params).
 
 * By the end I was in callback hell. Normally I'd have taken a different approach and used something like Async.js, but I assumed that would violate the "no frameworks" requirement, so I just suffered.
 
@@ -58,13 +58,15 @@ Notes
 
 * Enjoy the rant about validating emails in the comments...
 
-* I wish I had used something for dependency injection. Everything here is simple enough, but it'd have made throwing together some better unit tests easier.
+* I wish I had used something for dependency injection. Everything here is simple enough, but it'd have made throwing together some better unit tests easier. I ended up kind of half assing my own DI to write the client module's tests, but there's lots of room for improvement.
 
 * There is no global error handling. If something does actually blow up the server will just crash. Definitely something that would need to be taken care of in a real app. With Express it's 3 lines of code, but doing it without a framework just wasn't worth the time.
+
+* I wasn't worried about any kind of i18n or l10n so everything is pretty hardcoded, but it wouldn't be hard to break things up and abstract it out to fix that.
 
 Unit Tests
 ==========
 
-There are two incredibly simple unit tests I wrote as I was testing the encryption I was using. I had intended to write more, but it was going to be incredibly difficult to work around SQLite without using dependency injection.
+There are two unit tests - one for the encryption module that I actually used for TDD to make sure it was working, and one for the client module that I wrote after the fact to test some of the key pieces of logic.
 
-You can run them using `npm test`, as usual.
+I'm not terribly happy with the testing libraries I picked, they feel very clumsy (especially stub vs. mock), but you can run them using `npm test`, as usual.
