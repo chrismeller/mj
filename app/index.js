@@ -82,17 +82,3 @@ server.listen( port, ( error ) => {
 
     console.log( 'server is listening on port ', port );
 });
-
-// var clientHandler = {
-//     add: function( request, response ) {
-//         response.end('POST /clients');
-//     },
-
-//     get: function ( request, response ) {
-//         response.end('GET /client');
-//     },
-
-//     search: function ( request, response ) {
-//         response.end('GET /clients');
-//     }
-// };
